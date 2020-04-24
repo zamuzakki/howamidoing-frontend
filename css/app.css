@@ -1,0 +1,856 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+@import url("https://fonts.googleapis.com/css?family=Abhaya+Libre");
+
+
+
+/*      font size         */
+
+
+/* transition */
+
+
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+fieldset,
+form,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.no-select {
+    user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.styled-select {
+    background: url(../images/15xvbd5.png) no-repeat 96% 0;
+    height: 29px;
+    overflow: hidden;
+    width: 240px;
+}
+
+.styled-select select {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 5px;
+    /* If you add too much padding here, the options won't show in IE */
+    width: 268px;
+}
+
+.styled-select.slate select {
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 268px;
+}
+
+
+
+/* -------------------- Rounded Corners */
+
+.rounded {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.semi-square {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+
+/* -------------------- Colors: Background */
+
+.blue {
+    background-color: rgba(248, 252, 255, 0.13);
+}
+
+
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+html,
+body {
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    /* Fix for webkit rendering */
+    -webkit-text-size-adjust: 100%;
+}
+
+
+
+/* ------------------------------------------------------------------- */
+
+
+/* Typography
+---------------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: #2C3E50;
+    letter-spacing: 1px;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    font-weight: inherit;
+}
+
+h1 {
+    font-size: 30px;
+    line-height: 54px;
+}
+
+h2 {
+    font-size: 24px;
+    line-height: 48px;
+}
+
+h3 {
+    font-size: 22px;
+    line-height: 44px;
+}
+
+h4 {
+    font-size: 18px;
+    line-height: 36px;
+}
+
+h5 {
+    font-size: 16px;
+    line-height: 28px;
+}
+
+h6 {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+p {
+    font-family: 'Varela Round', sans-serif;
+    line-height: 24px;
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+p img {
+    margin: 0;
+}
+
+p.lead {
+    font-size: 21px;
+    line-height: 27px;
+    color: #555;
+}
+
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 700;
+    color: #333;
+}
+
+small {
+    font-size: 80%;
+}
+
+
+hr.mint {
+    background: #16A085;
+    border: 0;
+    width: 100px;
+    height: 3px;
+    clear: both;
+}
+
+
+
+/* ------------------------------------------------------------------- */
+
+
+/* Links
+---------------------------------------------------------------------- */
+
+a {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    text-decoration: none;
+    outline: 0;
+    color: #16A085 !important;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+}
+
+p a,
+p a:visited {
+    line-height: inherit;
+}
+
+
+
+/* ------------------------------------------------------------------- */
+
+
+/* Lists
+---------------------------------------------------------------------- */
+
+ul,
+ol {
+    margin: 0;
+}
+
+ul {
+    list-style: none outside;
+}
+
+ol {
+    list-style: decimal;
+}
+
+ol,
+ul.square,
+ul.circle,
+ul.disc {
+    margin-left: 10px;
+}
+
+ul.square {
+    list-style: square outside;
+}
+
+ul.circle {
+    list-style: circle outside;
+}
+
+ul.disc {
+    list-style: disc outside;
+}
+
+ul ul li,
+ul ol li,
+ol ol li,
+ol ul li {
+    line-height: 24px;
+}
+
+li {
+    line-height: 24px;
+}
+
+ul.large li {
+    line-height: 21px;
+}
+
+li p {
+    line-height: 24px;
+}
+
+a {
+    cursor: pointer;
+    outline: 0;
+}
+
+
+
+/* ==========================================================================
+   Search Section Start
+   ========================================================================== */
+
+#mainNav {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border: none;
+    background: #1ab394 !important;
+    font-size: 12px;
+}
+
+#mainNav .top_search {
+    height: 33px;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    #mainNav-2 {
+        padding: 20px;
+    }
+    #mainNav-2 .top_search {
+        margin: 20px 0;
+    }
+    .styled-select {
+        width: auto;
+    }
+    .styled-select select {
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+   }
+}
+
+#mainNav .top_search .top_search_con {
+    background: #fff;
+    height: 30px;
+    border: 1px solid #E4E4E4 !important;
+    border-radius: 50px;
+    width: 100%;
+}
+
+#mainNav .top_search .top_search_con input[type="text"] {
+    background: none !important;
+    border: medium none;
+    height: 100%;
+    width: 130px !important;
+    padding: 1px 20px 0 40px;
+    color: #818B8D !important;
+    font-size: 12px !important;
+    font-weight: 700;
+    outline: none;
+    transition: .5s ease-out;
+}
+
+#mainNav .top_search .top_search_con input[type="text"]:focus {
+    background: none !important;
+    border: medium none;
+    height: 100%;
+    width: 200px !important;
+    padding: 1px 20px 0 40px;
+    color: #818B8D !important;
+    font-size: 12px;
+    outline: none;
+}
+
+#mainNav .top_search .top_search_icon {
+    color: #1ab394 !important;
+    font-size: 1em;
+    left: 15px;
+    position: absolute;
+    top: 4px;
+}
+
+#mainNav .top_search .top_search_submit {
+    border: medium none;
+    padding: 0;
+    position: absolute;
+    width: 20px;
+    left: 12px;
+    opacity: 0;
+    top: 9px;
+}
+
+#mainNav .nav-item a.nav-link {
+    text-transform: uppercase;
+}
+
+#mainNav .nav-item a.nav-link:hover,
+#mainNav .nav-item a.nav-link:focus,
+#mainNav .nav-item a.nav-link:active,
+#mainNav .nav-item a.nav-link.active {
+    color: #fff !important;
+}
+
+
+
+
+/* ==========================================================================
+   Search Section Start
+   ========================================================================== */
+
+#mainNav-2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border: none;
+/*    background: #818b8d !important;*/
+    font-size: 12px;
+}
+
+#mainNav-2 .navbar-brand {
+    color: #fff;
+}
+
+#mainNav-2 .navbar-brand:hover,
+#mainNav-2 .navbar-brand:focus,
+#mainNav-2 .navbar-brand:active,
+#mainNav-2 .navbar-brand.active {
+    color: #fff !important;
+}
+
+#mainNav-2 .top_search {
+    height: 33px;
+    position: relative;
+    top: 0;
+}
+
+#mainNav-2 .top_search .top_search_con {
+    background: #fff;
+    height: 30px;
+    border: 1px solid #E4E4E4 !important;
+    border-radius: 50px;
+    width: 100%;
+}
+
+#mainNav-2 .top_search .top_search_con input[type="text"] {
+    background: none !important;
+    border: medium none;
+    height: 100%;
+    width: 500px !important;
+    padding: 1px 20px 0 40px;
+    color: #818B8D !important;
+    font-size: 12px !important;
+    font-weight: 700;
+    outline: none;
+    transition: .5s ease-out;
+}
+
+#mainNav-2 .top_search .top_search_con input[type="text"]:focus {
+    background: none !important;
+    border: medium none;
+    height: 100%;
+    width: 600px !important;
+    padding: 1px 20px 0 40px;
+    color: #818B8D !important;
+    font-size: 12px;
+    outline: none;
+}
+
+#mainNav-2 .top_search .top_search_icon {
+    color: #1ab394 !important;
+    font-size: 14px;
+    left: 15px;
+    position: absolute;
+    top: 4px;
+}
+
+#mainNav-2 .top_search .top_search_submit {
+    border: medium none;
+    padding: 0;
+    position: absolute;
+    width: 20px;
+    left: 12px;
+    opacity: 0;
+    top: 9px;
+}
+
+#mainNav-2 .nav-item a.nav-link {
+    text-transform: uppercase;
+}
+
+#mainNav-2 .nav-item a.nav-link:hover,
+#mainNav-2 .nav-item a.nav-link:focus,
+#mainNav-2 .nav-item a.nav-link:active,
+#mainNav-2 .nav-item a.nav-link.active {
+    color: #fff !important;
+}
+
+.bottom-footer {
+    float: left;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.bottom-footer p {
+    font-family: 'Abhaya Libre', serif;
+    color: #525252;
+    float: left;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    margin: 0;
+}
+
+.bottom-footer ul {
+    float: right;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+.bottom-footer ul li {
+    font-family: 'Abhaya Libre', serif;
+    color: #6b6b6b;
+    float: left;
+    margin: 2px 5px;
+    font-family: lato;
+}
+
+.bottom-footer ul li a {
+    font-family: 'Abhaya Libre', serif;
+    color: #6b6b6b;
+    font-size: 14px;
+    float: left;
+    padding: 2px 5px;
+}
+
+.bottom-footer ul li a:hover {
+    color: #fff;
+}
+
+#scrollup {
+    background: url("../images/arrow.png") no-repeat 0px 0px;
+    display: none;
+    text-decoration: none;
+    position: fixed;
+    bottom: 14px;
+    right: 3%;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border: none;
+    text-indent: 100%;
+    cursor: pointer;
+}
+
+.posts-2 {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.posts-2 h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: #858686;
+}
+
+.tr-section {
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.tr-section .tr-post {
+    position: relative;
+}
+
+.tr-section .entry-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.tr-section .entry-header:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.tr-section .entry-thumbnail {
+    z-index: -1;
+}
+
+.tr-section .tr-post .entry-header img {
+    width: 100%;
+    height: 200px;
+}
+
+.tr-section .tr-post .post-content {
+    font-size: 14px;
+    color: #585858;
+    line-height: 24px;
+    margin-top: 20px;
+}
+
+.tr-section .post-content .author-post {
+    width: 55px;
+    margin-top: -45px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.tr-section .post-content .author-post img {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+}
+
+.tr-section .entry-meta,
+.tr-section .entry-meta a {
+    font-family: 'Abhaya Libre', serif;
+    font-size: 13px;
+    color: #565858 !important;
+    font-weight: 500;
+}
+
+.tr-section .entry-meta {
+    overflow: hidden;
+}
+
+.tr-section .entry-meta ul,
+.tr-section .feed ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tr-section .entry-meta>ul>li {
+    margin-right: 30px;
+    position: relative;
+}
+
+.tr-section .entry-meta ul li {
+    float: left;
+}
+
+.tr-section .entry-meta>ul>li+li:before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: -15px;
+    width: 5px;
+    height: 5px;
+    margin-top: -3px;
+    border-radius: 100%;
+    background-color: #c8cacc;
+}
+
+.tr-section .entry-meta li ul li:first-child {
+    margin-right: 10px;
+}
+
+.tr-section h2 {
+    line-height: 0.8 !important;
+    margin-bottom: 20px !important;
+}
+
+.tr-section a.entry-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #1ab394 !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+/*.tr-section p {
+    font-family: 'Abhaya Libre', serif;
+    font-size: 16px;
+}*/
+
+.tr-section .read-more {
+    margin-top: 25px;
+    overflow: hidden;
+}
+
+.tr-section .continue-reading a {
+    font-family: 'Abhaya Libre', serif;
+    font-size: 12px;
+    color: #858686 !important;
+    text-transform: uppercase;
+}
+
+.tr-section .continue-reading i {
+    font-size: 18px;
+    margin-left: 10px;
+    float: right;
+    margin-top: 3px;
+}
+
+.tr-section .feed li {
+    font-family: 'Abhaya Libre', serif;
+    font-size: 14px;
+    float: left;
+    color: #858686 !important;
+    margin-right: 10px;
+}
+
+.tr-section .feed li i {
+    margin-right: 3px;
+}
+
+.tr-section .feed li a {
+    font-family: 'Abhaya Libre', serif;
+    color: #858686 !important;
+    padding: 5px;
+}
+
+.tr-ad {
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.ad-before {
+    position: relative;
+}
+
+.tr-ad img {
+    width: 100%;
+}
+
+.ad-before:after {
+    position: absolute;
+    content: "AD";
+    right: 0;
+    top: 0px;
+    width: 25px;
+    height: 20px;
+    padding: 5px;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 12px;
+    color: #fff;
+    background-color: #1ab394;
+    font-weight: 700;
+}

@@ -355,7 +355,7 @@ async function report(status) {
     };
 
     // Post report, then add last report to cookie
-    customFetch('http://0.0.0.0:8000/api/v1/report/', 'POST', payload)
+    customFetch('http://0.0.0.0:51202/api/v1/report/', 'POST', payload)
         .then(
             data => setCookie('lastReport', JSON.stringify(data), 3)
         )
@@ -403,7 +403,7 @@ function saveUserId() {
      */
 
     if(getCookie('userId')==""){
-        customFetch('http://0.0.0.0:8000/api/v1/user/', 'POST')
+        customFetch('http://0.0.0.0:51202/api/v1/user/', 'POST')
             .then(data => 
                 setCookie('userId', data.id, 30)
             );
@@ -418,7 +418,7 @@ function getStatusId() {
     
     //  Get status for 'All Well Here'
     if(getCookie('healthyStatusId')=="") {
-        customFetch('http://0.0.0.0:8000/api/v1/status/?name_contains=well')
+        customFetch('http://0.0.0.0:51202/api/v1/status/?name_contains=well')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('healthyStatusId', data.results[0].id, 30)
@@ -428,7 +428,7 @@ function getStatusId() {
 
     //  Get status for 'Need Food or Supplies'
     if(getCookie('suppliesStatusId')=="") {
-        customFetch('http://0.0.0.0:8000/api/v1/status/?name_contains=supplies')
+        customFetch('http://0.0.0.0:51202/api/v1/status/?name_contains=supplies')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('suppliesStatusId', data.results[0].id, 30)
@@ -438,7 +438,7 @@ function getStatusId() {
     
     //  Get status for 'Need Medical Help'
     if(getCookie('medicalStatusId')=="") {
-        customFetch('http://0.0.0.0:8000/api/v1/status/?name_contains=medical')
+        customFetch('http://0.0.0.0:51202/api/v1/status/?name_contains=medical')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('medicalStatusId', data.results[0].id, 30)

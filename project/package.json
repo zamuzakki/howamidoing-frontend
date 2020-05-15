@@ -1,0 +1,30 @@
+{
+  "name": "howamidoing-frontend",
+  "version": "1.0.0",
+  "description": "Frontend app for Howamidoing, app to report our status during COVID-19 quarantine",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartoza/howamidoing-frontend.git"
+  },
+  "keywords": [
+    "quarantine",
+    "report",
+    "status"
+  ],
+  "author": "Zulfikar Akbar Muzakki (zakki@kartoza.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kartoza/howamidoing-frontend/issues"
+  },
+  "homepage": "https://github.com/kartoza/howamidoing-frontend#readme",
+  "server-debug": "nodemon --inspect server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "pwa-asset-generator": "^2.3.0"
+  }
+}

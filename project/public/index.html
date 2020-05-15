@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Household COVID19 Status Progressive Web App">
+
+    <!-- ==============================================
+		Favicons
+		=============================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="js/manifest.json">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>How am I doing?</title>
+    <!-- ==============================================
+		CSS
+		=============================================== -->
+    <!-- Style-->
+    <link type="text/css" href="libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="libs/leaflet/leaflet.css"/>
+</head>
+
+<body>
+    <header>
+        <!-- ==============================================
+     Navigation Section
+     =============================================== -->
+        <nav class="navbar navbar-light navbar-toggleable-sm bg-faded justify-content-between" id="mainNav-2">
+            <button name="navbar menu" aria-label="Menu" aria-labelledby="mainNav-2" class="navbar-toggler navbar-toggler-right"  data-toggle="collapse" data-target="#collapsingNavbar2">
+                <span aria-label="toggler" class="navbar-toggler-icon"></span>
+            </button>
+            <a href="index.html" tabindex="0" class="navbar-brand mr-0"></a>
+            <div class="navbar-collapse collapse justify-content-between" id="collapsingNavbar2">
+                <ul class="navbar-nav  mx-auto">
+                    <li class="float-left" id="home">
+                        <a>Home</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /navbar-collapse -->
+        </nav>
+        <!-- /nav -->
+    </header>
+    <!-- ==============================================
+     Posts Section
+     =============================================== -->
+    <main class="posts-2">
+        <div class="container">
+            <div class="row" id="main">
+                <div class="col-sm-12">
+                    <div class="tr-section">
+                        <h1 class="col-sm-12 btn" href="#" >Household status</h1>
+                    </div>
+                <div class="col-sm-12">
+                    <div class="tr-section">
+                        <a id="well" class="btn btn-lg btn-success col-sm-12" href="#" role="button">All is well here</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="tr-section">
+                        <a id="supplies" class="btn btn-lg btn-warning col-sm-12" href="#" role="button">We need food or supplies</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="tr-section">
+                        <a id="medical" class="btn btn-lg btn-danger col-sm-12" href="#" role="button">We need medical help</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="tr-section">
+                        <a id="viewmap" class="btn btn-lg btn-secondary col-sm-12" href="#" role="button">View Map</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </main>
+    <!-- /.section -->
+    <!-- ==============================================
+     Footer Section
+     =============================================== -->
+     <footer class="bottom-footer">
+        <div class="container">
+        </div>
+    </footer>
+    
+    <!-- /footer -->
+    <a id="scrollup" tabindex="0">Scroll</a>
+    <!-- ==============================================
+	 Scripts
+	 =============================================== -->
+    <script src="libs/jquery/dist/jquery.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="libs/leaflet/leaflet.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

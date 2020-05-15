@@ -1,6 +1,4 @@
-const apikey = '85c36847b0824547b09be916bb261e75';
 const main = document.querySelector('#main');
-const mainHtml = main.innerHTML;
 
 const wellStatus = document.querySelector('#well');
 const suppliesStatus = document.querySelector('#supplies');
@@ -9,6 +7,19 @@ const viewMap = document.querySelector('#viewmap');
 const homeButton = document.querySelector('#home');
 
 var reportStatus;
+
+document.addEventListener('DOMContentLoaded', init, false);
+function init() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then((reg) => {
+        console.log('Service worker registered -->', reg);
+      }, (err) => {
+        console.error('Service worker not registered -->', err);
+      });
+  }
+}
+
 
 function getCookie(cname) {
     /**
@@ -66,7 +77,7 @@ function setHomeEventListener() {
     });
 
     homeButton.addEventListener('click', e => {
-        window.location.replace('index.html');
+        window.location.replace('/');
     });
 }
 
@@ -116,7 +127,7 @@ async function statusClicked(status) {
                     </div>`
 
                 main.innerHTML = view;
-                
+
                 // Add event listener to view map
                 const viewMap = document.querySelector('#viewmap');
                 viewMap.addEventListener('click', e => {
@@ -145,21 +156,21 @@ function getStyle(gridGeoJson) {
 
     let score = parseInt(gridGeoJson.properties.total_score);
     switch (score) {
-        case 0: 
-            color = "green"; 
+        case 0:
+            color = "green";
             break;
         case 2:
-            color = "yellow"; 
+            color = "yellow";
             break;
         case 3:
-            color = "red"; 
+            color = "red";
             break;
     }
 
     let style = {
         color: color,
         weight: 1,
-        fillOpacity: 0.5   
+        fillOpacity: 0.5
     };
 
     return style;
@@ -174,20 +185,21 @@ function renderGrid(value) {
     /*
      Leaflet uses Lat Lng instead of Lng Lat so
      we will reverse it manually
-     */ 
+     */
 
     // Swap Lat and lLong for Leaflet
     value.geometry.coordinates[0].forEach(element => {
         [element[0], element[1]] = [element[1], element[0]];
     });
-    
+
     // Add grid to layer. The layer is already added to the map
     gridLayer.addLayer(L.polygon(value.geometry.coordinates[0], getStyle(value)));
 }
 
+
 async function getGrid(bounds) {
     /**
-     * Retrieve grid score from API using BBox and 
+     * Retrieve grid score from API using BBox and
      * call function to add it to map
      * @param bounds bounds object from Leaflet getBounds()
      */
@@ -200,7 +212,7 @@ async function getGrid(bounds) {
     BBox is transformed to match the API format
     */
     customFetch(
-        'http://localhost:8000/api/v1/grid-score/?in_bbox=' + transformBBox(bounds)
+        'https://howamidoing-api.zamuzakki.codes/api/v1/grid-score/?in_bbox=' + transformBBox(bounds)
     ).then(
         data => {
             data.features.forEach(renderGrid);
@@ -252,12 +264,15 @@ async function map() {
     window.gridLayer = new L.FeatureGroup();
 
     // Instantiate new Map with and add previously created layer
+    let location = JSON.parse(getCookie('location'));
     window.reportMap = L.map('map',{
-        center: [-33.92210531996986, 18.40417142576775],
-        worldCopyJump: true, 
+        center: [location.latitude, location.longitude],
+        worldCopyJump: true,
         zoom: 13,
         layers: [baseLayer, gridLayer]
     });
+
+    L.marker([location.latitude, location.longitude]).addTo(reportMap);
 
     // Base layer for layer control
     var baseMaps = {
@@ -276,9 +291,9 @@ async function map() {
     getGrid(reportMap.getBounds());
 
     // As we pan and zoom, load associated grid
-    reportMap.on('moveend', function(event) {   
+    reportMap.on('moveend', function(event) {
         var bounds = event.target.getBounds();
-        /* 
+        /*
         To ease the API because of the number of grid,
         we only load grid when zoom level is more than 10
         */
@@ -366,7 +381,7 @@ async function customFetch(url = '', method = 'GET', payload = {}) {
      * @param payload Data to be sent in the Request body
      */
 
-    /* 
+    /*
     Default options are marked with *
     No body by default
     */
@@ -401,7 +416,7 @@ function saveUserId() {
 
     if(getCookie('userId')==""){
         customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/user/', 'POST')
-            .then(data => 
+            .then(data =>
                 setCookie('userId', data.id, 30)
             );
     }
@@ -412,7 +427,7 @@ function getStatusId() {
      * Get status ID and save to cookies.
      * Saved ID will be used for creating report
      */
-    
+
     //  Get status for 'All Well Here'
     if(getCookie('healthyStatusId')=="") {
         customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/status/?name_contains=well')
@@ -432,7 +447,7 @@ function getStatusId() {
                 }
             });
     }
-    
+
     //  Get status for 'Need Medical Help'
     if(getCookie('medicalStatusId')=="") {
         customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/status/?name_contains=medical')

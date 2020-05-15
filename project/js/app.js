@@ -174,18 +174,15 @@ function renderGrid(value) {
     /*
      Leaflet uses Lat Lng instead of Lng Lat so
      we will reverse it manually
-     */
-     
-    coords = [
-        [coords[0][1],coords[0][0]],
-        [coords[1][1],coords[1][0]],
-        [coords[2][1],coords[2][0]],
-        [coords[3][1],coords[3][0]],
-        [coords[4][1],coords[4][0]]
-    ]
+     */ 
+
+    // Swap Lat and lLong for Leaflet
+    value.geometry.coordinates[0].forEach(element => {
+        [element[0], element[1]] = [element[1], element[0]];
+    });
     
     // Add grid to layer. The layer is already added to the map
-    gridLayer.addLayer(L.polygon(coords, getStyle(value)));
+    gridLayer.addLayer(L.polygon(value.geometry.coordinates[0], getStyle(value)));
 }
 
 async function getGrid(bounds) {

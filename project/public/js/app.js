@@ -14,6 +14,9 @@ function init() {
     navigator.serviceWorker.register('/service-worker.js')
       .then((reg) => {
         console.log('Service worker registered -->', reg);
+        if (reg.state == 'activated' && !navigator.serviceWorker.controller) {
+            document.querySelector('#status').classList.add('active');
+        }
       }, (err) => {
         console.error('Service worker not registered -->', err);
       });
@@ -54,7 +57,6 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-
 function setHomeEventListener() {
     /**
      * Set event listener to home
@@ -86,6 +88,28 @@ window.addEventListener('load', async e => {
      * Set event listener on load
      */
     setHomeEventListener()
+
+      function updateOnlineStatus(event) {
+        var condition = navigator.onLine ? "Household status (Online)" : "Household status (Offline)";
+
+        document.querySelector('#status').innerHTML = condition;
+
+        if(navigator.onLine) {
+            wellStatus.classList.remove('disabled');
+            suppliesStatus.classList.remove('disabled');
+            medicalStatus.classList.remove('disabled');
+            viewMap.classList.remove('disabled');
+        }
+        else {
+            wellStatus.classList.add('disabled');
+            suppliesStatus.classList.add('disabled');
+            medicalStatus.classList.add('disabled');
+            viewMap.classList.add('disabled');
+        }
+      }
+
+      window.addEventListener('online',  updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
 });
 
 async function statusClicked(status) {

@@ -87,9 +87,9 @@ window.addEventListener('load', async e => {
     /**
      * Set event listener on load
      */
-    setHomeEventListener()
+    setHomeEventListener();
 
-      function updateOnlineStatus(event) {
+    function updateOnlineStatus(event) {
         var condition = navigator.onLine ? "Household status (Online)" : "Household status (Offline)";
 
         document.querySelector('#status').innerHTML = condition;
@@ -106,10 +106,10 @@ window.addEventListener('load', async e => {
             medicalStatus.classList.add('disabled');
             viewMap.classList.add('disabled');
         }
-      }
+    }
 
-      window.addEventListener('online',  updateOnlineStatus);
-      window.addEventListener('offline', updateOnlineStatus);
+    window.addEventListener('online',  updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
 });
 
 async function statusClicked(status) {

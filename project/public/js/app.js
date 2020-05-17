@@ -236,7 +236,7 @@ async function getGrid(bounds) {
     BBox is transformed to match the API format
     */
     customFetch(
-        'https://howamidoing-api.zamuzakki.codes/api/v1/grid-score/?in_bbox=' + transformBBox(bounds)
+        'https://howamidoing-api.zamuzakki.codes/api/v1/grid-score/?no_page&in_bbox=' + transformBBox(bounds)
     ).then(
         data => {
             data.features.forEach(renderGrid);

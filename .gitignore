@@ -2,3 +2,4 @@
 /dist
 /tmp
 /out-tsc
+project/node_modules/

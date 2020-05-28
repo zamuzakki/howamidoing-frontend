@@ -123,7 +123,6 @@ async function statusClicked(status) {
     await report(status)
         .then(
             data => {
-                console.log(data);
                 const view = `
                 <div class="container">
                         <div class="row" id="main">
@@ -172,90 +171,6 @@ function setAttributes(elem, attrs) {
     }
 }
 
-function getStyle(gridGeoJson) {
-    /**
-     * Get correct style for certain Grid Score
-     * @param gridGeoJson GeoJson feature of Grid Score
-     */
-
-    let score = parseInt(gridGeoJson.properties.total_score);
-    switch (score) {
-        case 0:
-            color = "green";
-            break;
-        case 2:
-            color = "yellow";
-            break;
-        case 3:
-            color = "red";
-            break;
-    }
-
-    let style = {
-        color: color,
-        weight: 1,
-        fillOpacity: 0.5
-    };
-
-    return style;
-}
-
-function renderGrid(value) {
-    /**
-     * Render Grid Score to map.
-     */
-    let coords = value.geometry.coordinates[0];
-
-    /*
-     Leaflet uses Lat Lng instead of Lng Lat so
-     we will reverse it manually
-     */
-
-    // Swap Lat and lLong for Leaflet
-    value.geometry.coordinates[0].forEach(element => {
-        [element[0], element[1]] = [element[1], element[0]];
-    });
-
-    // Add grid to layer. The layer is already added to the map
-    gridLayer.addLayer(L.polygon(value.geometry.coordinates[0], getStyle(value)));
-}
-
-
-async function getGrid(bounds) {
-    /**
-     * Retrieve grid score from API using BBox and
-     * call function to add it to map
-     * @param bounds bounds object from Leaflet getBounds()
-     */
-
-    // Clear all element in gridLayer
-    gridLayer.clearLayers();
-
-    /*
-    Fetch grid score using BBbox
-    BBox is transformed to match the API format
-    */
-    customFetch(
-        'https://howamidoing-api.zamuzakki.codes/api/v1/grid-score/?no_page&in_bbox=' + transformBBox(bounds)
-    ).then(
-        data => {
-            data.features.forEach(renderGrid);
-            return data;
-        }
-    )
-}
-
-function transformBBox(leafletBounds) {
-    /**
-     * Transform Leaflet Bounds to BBox
-     * Format: Left, Top, Right, Bottom
-     * @param bounds bounds object from Leaflet getBounds()
-     */
-
-    let bound = leafletBounds.getWest() + ',' + leafletBounds.getNorth() + ',' +
-                leafletBounds.getEast() + ',' + leafletBounds.getSouth();
-    return bound
-}
 
 async function map() {
     /**
@@ -268,7 +183,7 @@ async function map() {
             </div>
         </div>
         <!-- /.row -->
-    </div>`
+    </div>`;
 
     main.innerHTML = view;
 
@@ -289,15 +204,35 @@ async function map() {
     var gridOptions = {
         vectorTileLayerStyles: {
 	    // assuming sliced is the layer name
-            sliced: {
-              fillColor: "red",
-              color: "black",
-              weight: 0.5
+            default: function(properties) {
+                var score = parseFloat(properties.total_score);
+                var color = "green";
+                var fillOpacity = 0.3;
+
+                switch (score) {
+                    case 1.00:
+                        color = "yellow";
+                        fillOpacity = 0.5;
+                        break;
+                    case 2.00:
+                        color = "red";
+                        fillOpacity = 0.5;
+                        break;
+                }
+
+                var style = {
+                    fillColor: color,
+                    fillOpacity: fillOpacity,
+                    color: color,
+                    weight: 0.5,
+                    fill: true
+                };
+
+                return style;
             }
         },
     };
     var gridLayer = L.vectorGrid.protobuf(gridUrl, gridOptions);
-    console.log(gridLayer.getDataLayerNames());
 
     // Instantiate new Map with and add previously created layer
     let location = JSON.parse(getCookie('location'));

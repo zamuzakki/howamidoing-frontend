@@ -282,10 +282,22 @@ async function map() {
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiemFtdXpha2tpIiwiYSI6ImNrOXp1NzIxYzA1eW4zZ2xsNDVkamIyaHEifQ.NilvKOQdAclqr3X1JU-MwQ'
-    })
+    });
 
     // Add new layer for grid score
-    window.gridLayer = new L.FeatureGroup();
+    var gridUrl = "https://howamidoing-api.zamuzakki.codes/api/v1/grid-score-tiles/?tile={z}/{x}/{y}";
+    var gridOptions = {
+        vectorTileLayerStyles: {
+	    // assuming sliced is the layer name
+            sliced: {
+              fillColor: "red",
+              color: "black",
+              weight: 0.5
+            }
+        },
+    };
+    var gridLayer = L.vectorGrid.protobuf(gridUrl, gridOptions);
+    console.log(gridLayer.getDataLayerNames());
 
     // Instantiate new Map with and add previously created layer
     let location = JSON.parse(getCookie('location'));
@@ -310,21 +322,6 @@ async function map() {
 
     // Add to layer control, then add to Map
     L.control.layers(baseMaps, overlayMaps).addTo(reportMap);
-
-    // Load initial grid
-    getGrid(reportMap.getBounds());
-
-    // As we pan and zoom, load associated grid
-    reportMap.on('moveend', function(event) {
-        var bounds = event.target.getBounds();
-        /*
-        To ease the API because of the number of grid,
-        we only load grid when zoom level is more than 10
-        */
-        if(event.target.getZoom() >= 10){
-            getGrid(bounds);
-        }
-    });
 
 }
 

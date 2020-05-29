@@ -235,7 +235,14 @@ async function map() {
     var gridLayer = L.vectorGrid.protobuf(gridUrl, gridOptions);
 
     // Instantiate new Map with and add previously created layer
-    let location = JSON.parse(getCookie('location'));
+
+    // If there is no user location, current default to cape town location
+    let location;
+    if( getCookie('location') )
+        location = JSON.parse(getCookie('location'))
+    else
+        location = { latitude: -34, longitude: 18.5 };
+
     window.reportMap = L.map('map',{
         center: [location.latitude, location.longitude],
         worldCopyJump: true,

@@ -200,7 +200,7 @@ async function map() {
     });
 
     // Add new layer for grid score
-    var gridUrl = "https://howamidoing-api.zamuzakki.codes/api/v1/grid-score-tiles/?tile={z}/{x}/{y}";
+    var gridUrl = "https://howamidoing.backend.kartoza.com/api/v1/grid-score-tiles/?tile={z}/{x}/{y}";
     var gridOptions = {
         vectorTileLayerStyles: {
 	    // assuming sliced is the layer name
@@ -330,7 +330,7 @@ async function report(status) {
     };
 
     // Post report, then add last report to cookie
-    customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/report/', 'POST', payload)
+    customFetch('https://howamidoing.backend.kartoza.com/api/v1/report/', 'POST', payload)
         .then(
             data => setCookie('lastReport', JSON.stringify(data), 3)
         )
@@ -378,7 +378,7 @@ function saveUserId() {
      */
 
     if(getCookie('userId')==""){
-        customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/user/', 'POST')
+        customFetch('https://howamidoing.backend.kartoza.com/api/v1/user/', 'POST')
             .then(data =>
                 setCookie('userId', data.id, 30)
             );
@@ -393,7 +393,7 @@ function getStatusId() {
 
     //  Get status for 'All Well Here'
     if(getCookie('healthyStatusId')=="") {
-        customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/status/?name_contains=well')
+        customFetch('https://howamidoing.backend.kartoza.com/api/v1/status/?name_contains=well')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('healthyStatusId', data.results[0].id, 30)
@@ -403,7 +403,7 @@ function getStatusId() {
 
     //  Get status for 'Need Food or Supplies'
     if(getCookie('suppliesStatusId')=="") {
-        customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/status/?name_contains=supplies')
+        customFetch('https://howamidoing.backend.kartoza.com/api/v1/status/?name_contains=supplies')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('suppliesStatusId', data.results[0].id, 30)
@@ -413,7 +413,7 @@ function getStatusId() {
 
     //  Get status for 'Need Medical Help'
     if(getCookie('medicalStatusId')=="") {
-        customFetch('https://howamidoing-api.zamuzakki.codes/api/v1/status/?name_contains=medical')
+        customFetch('https://howamidoing.backend.kartoza.com/api/v1/status/?name_contains=medical')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('medicalStatusId', data.results[0].id, 30)

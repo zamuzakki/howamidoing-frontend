@@ -3,9 +3,9 @@ const CACHE_NAME = 'howamidoing-cache';
 const toCache = [
     './',
     './css/app.css',
-    './libs/bootstrap/dist/css/bootstrap.css',
-    './libs/jquery/dist/jquery.js',
-    './libs/bootstrap/dist/js/bootstrap.js',
+    './libs/bootstrap/dist/css/bootstrap.min.css',
+    './libs/jquery/dist/jquery.min.js',
+    './libs/bootstrap/dist/js/bootstrap.min.js',
     './js/app.js',
     './fallback.json',
 ];

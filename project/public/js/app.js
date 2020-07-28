@@ -203,11 +203,12 @@ async function map() {
     var gridUrl = "https://howamidoing.backend.kartoza.com/v2/api/grid-score-tiles/?tile={z}/{x}/{y}";
     var gridOptions = {
         vectorTileLayerStyles: {
-	    // assuming sliced is the layer name
+	    // assuming default is the layer name
             default: function(properties) {
                 var score = parseFloat(properties.total_score);
+                var totalReport = parseInt(properties.total_report);
                 var color = "green";
-                var fillOpacity = 0.3;
+                var fillOpacity = totalReport > 0 ? 0.5 : 0;
 
                 switch (score) {
                     case 1.00:
@@ -262,31 +263,12 @@ async function map() {
         "Grids": gridLayer
     };
 
-    var opts = {
-        lines: 13, // The number of lines to draw
-        length: 38, // The length of each line
-        width: 17, // The line thickness
-        radius: 45, // The radius of the inner circle
-        scale: 1, // Scales overall size of the spinner
-        corners: 1, // Corner roundness (0..1)
-        speed: 1, // Rounds per second
-        rotate: 0, // The rotation offset
-        animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        color: '#ffffff', // CSS color or array of colors
-        fadeColor: 'transparent', // CSS color or array of colors
-        shadow: '0 0 1px transparent', // Box-shadow for the lines
-        zIndex: 2000000000, // The z-index (defaults to 2e9)
-        className: 'spinner', // The CSS class to assign to the spinner
-        position: 'absolute', // Element positioning
-    };
-
-    gridLayer.on('loading', function (event) {
-        reportMap.spin(true, opts);
-    });
-    gridLayer.on('load', function (event) {
-        reportMap.spin(false);
-    });
+    reportMap.on("movestart", function () {
+        reportMap.removeLayer(gridLayer);
+    })
+    reportMap.on("moveend", function () {
+        reportMap.addLayer(gridLayer);
+    })
 
     // Add to layer control, then add to Map
     L.control.layers(baseMaps, overlayMaps).addTo(reportMap);

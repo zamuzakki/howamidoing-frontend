@@ -200,7 +200,7 @@ async function map() {
     });
 
     // Add new layer for grid score
-    var gridUrl = "https://howamidoing.backend.kartoza.com/api/v1/grid-score-tiles/?tile={z}/{x}/{y}";
+    var gridUrl = "https://howamidoing.backend.kartoza.com/v2/api/grid-score-tiles/?tile={z}/{x}/{y}";
     var gridOptions = {
         vectorTileLayerStyles: {
 	    // assuming sliced is the layer name
@@ -238,19 +238,19 @@ async function map() {
 
     // If there is no user location, current default to cape town location
     let location;
-    if( getCookie('location') )
-        location = JSON.parse(getCookie('location'))
+    if( getCookie('location4326') )
+        location = JSON.parse(getCookie('location4326'))
     else
-        location = { latitude: -34, longitude: 18.5 };
+        location = { lat: -34, lon: 18.5 };
 
     window.reportMap = L.map('map',{
-        center: [location.latitude, location.longitude],
+        center: [location.lat, location.lon],
         worldCopyJump: true,
         zoom: 13,
         layers: [baseLayer, gridLayer]
     });
 
-    L.marker([location.latitude, location.longitude]).addTo(reportMap);
+    L.marker([location.lat, location.lon]).addTo(reportMap);
 
     // Base layer for layer control
     var baseMaps = {
@@ -273,19 +273,33 @@ function showPosition(position) {
      * set to cookies
      */
     let location = {
-        longitude: position.coords.longitude,
-        latitude: position.coords.latitude
+        lon: position.coords.longitude,
+        lat: position.coords.latitude
     }
 
-    setCookie('location', JSON.stringify(location), 3)
+    let location3857 = transformToRounded3857(location.lat, location.lon);
+    setCookie('location4326', JSON.stringify(location), 3)
+    setCookie('location3857', JSON.stringify(location3857), 3)
     return location;
+}
+
+function transformToRounded3857(latitude, longitude) {
+    /**
+     * Transform coordinate from 4326 to rounderd 3857
+     */
+    var coord = L.CRS.EPSG3857.project({lat: latitude, lng: longitude});
+    coord = {
+        x: Math.round(coord.x/1000)*1000,
+        y: Math.round(coord.y/1000)*1000
+    }
+    return coord;
 }
 
 async function getLocation() {
     /**
      * Get user location from browser popup
      */
-    if(getCookie('location')==""){
+    if(getCookie('location4326')==""){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(getLocation_success, getLocation_error);
         } else {
@@ -314,7 +328,7 @@ async function report(status) {
      */
 
      // Get location cookie
-    let location = JSON.parse(getCookie('location'));
+    let location = JSON.parse(getCookie('location3857'));
 
 
     var payload = {
@@ -323,14 +337,14 @@ async function report(status) {
         location: {
             type: "Point",
             coordinates: [
-                location.longitude,
-                location.latitude
+                location.x,
+                location.y
             ]
         }
     };
 
     // Post report, then add last report to cookie
-    customFetch('https://howamidoing.backend.kartoza.com/api/v1/report/', 'POST', payload)
+    customFetch('https://howamidoing.backend.kartoza.com/v2/api/report/', 'POST', payload)
         .then(
             data => setCookie('lastReport', JSON.stringify(data), 3)
         )
@@ -378,7 +392,7 @@ function saveUserId() {
      */
 
     if(getCookie('userId')==""){
-        customFetch('https://howamidoing.backend.kartoza.com/api/v1/user/', 'POST')
+        customFetch('https://howamidoing.backend.kartoza.com/v2/api/user/', 'POST')
             .then(data =>
                 setCookie('userId', data.id, 30)
             );
@@ -393,7 +407,7 @@ function getStatusId() {
 
     //  Get status for 'All Well Here'
     if(getCookie('healthyStatusId')=="") {
-        customFetch('https://howamidoing.backend.kartoza.com/api/v1/status/?name_contains=well')
+        customFetch('https://howamidoing.backend.kartoza.com/v2/api/status/?name_contains=well')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('healthyStatusId', data.results[0].id, 30)
@@ -403,7 +417,7 @@ function getStatusId() {
 
     //  Get status for 'Need Food or Supplies'
     if(getCookie('suppliesStatusId')=="") {
-        customFetch('https://howamidoing.backend.kartoza.com/api/v1/status/?name_contains=supplies')
+        customFetch('https://howamidoing.backend.kartoza.com/v2/api/status/?name_contains=supplies')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('suppliesStatusId', data.results[0].id, 30)
@@ -413,7 +427,7 @@ function getStatusId() {
 
     //  Get status for 'Need Medical Help'
     if(getCookie('medicalStatusId')=="") {
-        customFetch('https://howamidoing.backend.kartoza.com/api/v1/status/?name_contains=medical')
+        customFetch('https://howamidoing.backend.kartoza.com/v2/api/status/?name_contains=medical')
             .then(data => {
                 if (data.count == 1) {
                     setCookie('medicalStatusId', data.results[0].id, 30)
